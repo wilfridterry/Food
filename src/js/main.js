@@ -36,7 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    function setTimer(el, deadline) {
+    function setTimer(selector, deadline) {
+        const el = document.querySelector(selector);
         const daysEl = el.querySelector('#days');
         const hoursEl = el.querySelector('#hours');
         const minutesEl = el.querySelector('#minutes');
@@ -89,5 +90,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    setTimer(document.querySelector('.promotion__timer'), '06-01-2022');
+    setTimer('.promotion__timer', '09-01-2022');
 });
