@@ -141,4 +141,87 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     document.addEventListener('scroll', showModalByScroll);
+
+    new MenuCard(cards).render();
 });
+
+const cards = [
+    {
+        image: {
+            src: 'img/tabs/vegy.jpg',
+            alt: 'vegy'
+        },
+        title: 'Меню "Фитнес"',
+        content: 'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
+        price: 11
+    },
+    {
+        image: {
+            src: 'img/tabs/elite.jpg',
+            alt: 'elite'
+        },
+        title: 'Меню “Премиум”',
+        content: 'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!',
+        price: 30
+    },
+    {
+        image: {
+            src: 'img/tabs/post.jpg',
+            alt: 'post'
+        },
+        title: 'Меню "Постное"',
+        content: 'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков.',
+        price: 20
+    }
+];
+
+class CardItem {
+
+    constructor(title, content, {src, alt}, price) {
+        this.title = title;
+        this.content = content;
+        this.imageSrc = src;
+        this.imageAlt = alt;
+        this.price = price;
+    }
+
+    render() {
+        return `
+            <div class="menu__item">
+                <img src="${this.imageSrc}" alt="${this.imageAlt}">
+                <h3 class="menu__item-subtitle">${this.title}</h3>
+                <div class="menu__item-descr">${this.content}</div>
+                <div class="menu__item-divider"></div>
+                <div class="menu__item-price">
+                    <div class="menu__item-cost">Цена:</div>
+                    <div class="menu__item-total"><span>${this.convertToUAH()}</span> грн/день</div>
+                </div>
+            </div>
+        `;
+    }
+
+    convertToUAH() {
+        return new Number(this.price * 27);
+    }
+}
+
+class MenuCard {
+    constructor(cards) {
+        this.cards = cards;
+        this.container = document.querySelector('.menu__field>.container');
+    }
+
+    render() {
+        this.cards.forEach(card => {
+            const cardItem = new CardItem(
+                    card.title,
+                    card.content,
+                    card.image,
+                    card.price
+                );
+            
+            this.container
+                .insertAdjacentHTML('beforeend', cardItem.render());
+        });
+    }
+}

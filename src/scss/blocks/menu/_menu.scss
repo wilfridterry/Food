@@ -1,9 +1,12 @@
 .menu {
     padding: 40px 0 50px 0;
     .container {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
+        display: grid;
+        grid-template-rows: 493px;
+        grid-template-columns: repeat(auto-fit, 320px);
+        gap: 40px 120px;
+        grid-auto-rows: 493px;
+        justify-content: center;
     }
     .title {
         text-align: center;
