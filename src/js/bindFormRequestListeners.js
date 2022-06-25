@@ -1,8 +1,14 @@
 import { showThanksModal } from "./modals";
 import { post } from './request';
 
-export function sendFormRequestListener(form) {
+export function bindFormRequestListeners(form) {
 
+    for (let form of document.forms) {
+        bindFormListener(form)
+    }
+}
+
+function bindFormListener(form) {
     form.addEventListener('submit', async e => {
         e.preventDefault();
                 

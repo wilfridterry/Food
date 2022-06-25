@@ -2,7 +2,7 @@ import { initTabs } from './tabs';
 import { setTimer } from './timer';
 import { initModals } from './modals';
 import { MenuCard } from './menu/menuCard';
-import { sendFormRequestListener } from './sendFormRequestListener';
+import { bindFormRequestListeners } from './bindFormRequestListeners';
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -12,9 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     new MenuCard().render();
 
-    for (let form of document.forms) {
-        sendFormRequestListener(form);
-    }
+    bindFormRequestListeners();
+    
 });
 
 
