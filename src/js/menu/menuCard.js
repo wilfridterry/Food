@@ -1,4 +1,5 @@
 import { CardItem } from "./cardItem.js";
+import { get } from './../request.js';
 
 export class MenuCard {
     constructor() {
@@ -8,23 +9,24 @@ export class MenuCard {
     async render() {
         const cards = await this.sendCardsGetRequest();
 
-        cards.forEach(card => {
-            const cardItem = new CardItem(
-                    card.title,
-                    card.content,
-                    card.image,
-                    card.price
-                );
-            
+        cards.forEach(({title, content, image, price }) => {
+
+            const cardItem = new CardItem(title, content, image, price);
+    
             this.container
                 .insertAdjacentHTML('beforeend', cardItem.render());
         });
     }
 
     async sendCardsGetRequest() {
-        const response = await fetch('http://localhost:3000/menu');
-        const cards = await response.json();
+        let response = [];
 
-        return cards;
+        try {
+            response = await get('http://localhost:3000/menu');    
+        } catch (e) {
+            console.log(e)
+        }
+
+        return response;
     }
 }

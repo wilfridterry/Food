@@ -7,9 +7,19 @@ export async function post(url, data) {
         body: JSON.stringify(data)
     });
 
+    if (!response.ok) {
+        throw new Error(`Could not fetch ${fetch}, status: ${response.status}`);
+    }
+
     return response.json();
 }
 
-export function get() {
+export async function get(url) {
+    const response = await fetch(url);
 
+    if (!response.ok) {
+        throw new Error(`Could not fetch ${fetch}, status: ${response.status}`);
+    }
+
+    return response.json();
 }

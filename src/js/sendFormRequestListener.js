@@ -10,7 +10,9 @@ export function sendFormRequestListener(form) {
         spinnerElem.innerHTML = "SPINNER";
         form.insertAdjacentElement('afterend', spinnerElem);
 
-        const data = Object.fromEntries(new FormData(form));
+        const formdata = new FormData(form);
+
+        const data = Object.fromEntries(formdata.entries());
         
         try {
             const json = await post('http://localhost:3000/contact-us', data);

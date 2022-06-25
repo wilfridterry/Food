@@ -29,7 +29,7 @@
     },
     {
       "image": {
-        "src": "https://dummyimage.com/640x360/fff/aaa",
+        "src": "https://picsum.photos/650/400",
         "alt": "image placeholder"
       },
       "title": "Меню \"Delicates\"",
@@ -47,6 +47,11 @@
       "name": "node-course",
       "phone": "4745",
       "id": 3
+    },
+    {
+      "name": "weather-cli",
+      "phone": "4745",
+      "id": 4
     }
   ]
 }
