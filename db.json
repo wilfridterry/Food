@@ -41,17 +41,12 @@
     {
       "name": "node-course",
       "phone": "4745",
+      "id": 1
+    },
+    {
+      "name": "Express",
+      "phone": "5555 555 555",
       "id": 2
-    },
-    {
-      "name": "node-course",
-      "phone": "4745",
-      "id": 3
-    },
-    {
-      "name": "weather-cli",
-      "phone": "4745",
-      "id": 4
     }
   ]
 }

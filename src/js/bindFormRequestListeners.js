@@ -1,5 +1,6 @@
 import { showThanksModal } from "./modals";
 import { post } from './request';
+import axios from "axios";
 
 export function bindFormRequestListeners(form) {
 
@@ -21,7 +22,7 @@ function bindFormListener(form) {
         const data = Object.fromEntries(formdata.entries());
         
         try {
-            const json = await post('http://localhost:3000/contact-us', data);
+            await axios.post('http://localhost:3000/contact-us', data);
 
             spinnerElem.remove();
             showThanksModal('Success. Thank you.');

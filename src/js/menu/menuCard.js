@@ -1,5 +1,6 @@
 import { CardItem } from "./cardItem.js";
 import { get } from './../request.js';
+import axios from 'axios';
 
 export class MenuCard {
     constructor() {
@@ -19,14 +20,15 @@ export class MenuCard {
     }
 
     async sendCardsGetRequest() {
-        let response = [];
+        let cards = [];
 
         try {
-            response = await get('http://localhost:3000/menu');    
+            const {data} = await axios('http://localhost:3000/menu');    
+            cards = data; 
         } catch (e) {
             console.log(e)
         }
 
-        return response;
+        return cards;
     }
 }
