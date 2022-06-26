@@ -1,6 +1,15 @@
 export class Slider {
+    container;
     slideIndex = 0;
-    
+    wrapper;
+    total;
+    viewport;
+    listDotsContainer;
+    listDots;
+    prev;
+    next;
+    currentSlide;
+
     constructor(selector) { 
         this.container = document.querySelector(selector);
         
@@ -8,22 +17,53 @@ export class Slider {
     }
 
     #init() {
-        this.slideWidth = this.container.querySelector('.offer__slider-wrapper').clientWidth;
+        this.wrapper = this.container.querySelector('.offer__slider-wrapper');
+        this.slideWidth = this.wrapper.clientWidth;
         this.total = this.container.querySelectorAll('.offer__slide').length;
 
         this.viewport = this.container.querySelector('.offer__slider-container'); 
         this.viewport.style.width = (this.total * this.slideWidth) + 'px';
 
+        this.#addDotsNavigation();
         this.prev = this.container.querySelector('.offer__slider-prev');
         this.next = this.container.querySelector('.offer__slider-next'); 
 
-        this.container.querySelector('.offer__slider-counter>#total').innerHTML = this.#convertCounter(this.total);
-        this.currentSlide = this.container.querySelector('.offer__slider-counter>#current');
-
-        this.#setCurrentSlide();
-
         this.next.onclick = this.onClickNext.bind(this);
         this.prev.onclick = this.onClickPrev.bind(this);
+        this.listDotsContainer.onclick = this.onClickDot.bind(this);
+
+        this.container.querySelector('.offer__slider-counter>#total').innerHTML = this.#convertCounter(this.total);
+        this.container.querySelector('.dot').classList.add('dot-active');
+        this.currentSlide = this.container.querySelector('.offer__slider-counter>#current');
+        this.#setCurrentSlide();
+    }
+
+    #addDotsNavigation() {
+        const listDotsContainer = document.createElement('ul');
+        listDotsContainer.classList.add('carousel-indicators');
+
+        for (let i = 0; i < this.total; i++) {
+            let dot = document.createElement('li');
+            dot.classList.add('dot');
+            listDotsContainer.append(dot);
+        }
+
+        this.listDotsContainer = listDotsContainer;
+        this.wrapper.append(listDotsContainer);
+        this.listDots = this.listDotsContainer.querySelectorAll('.dot');
+    }
+
+    onClickDot(e) {
+        if (e.target.classList.contains('dot')) {
+
+            this.listDots.forEach((dot, index) => {
+                if (e.target == dot) {
+                    this.slideIndex = index;
+                }
+            });
+
+            this.#slide();
+        }
     }
 
     onClickNext(e) {
@@ -33,8 +73,7 @@ export class Slider {
             this.slideIndex++;
         }
 
-        this.#slideItem();
-        this.#setCurrentSlide();
+        this.#slide();
     }
 
     onClickPrev(e) {
@@ -43,16 +82,26 @@ export class Slider {
         }
 
         this.slideIndex--;
-        this.#slideItem();
-        this.#setCurrentSlide();
+        this.#slide();
     }
 
+    #slide() {
+        this.#slideItem();
+        this.#setCurrentSlide();
+        this.#setCurrentDot();
+    }
+    
     #setCurrentSlide() {
         this.currentSlide.innerHTML = this.#convertCounter(this.slideIndex + 1);
     }
     
     #slideItem() {
         this.viewport.style.transform = `translateX(-${(this.slideWidth * this.slideIndex)}px)`; 
+    }
+
+    #setCurrentDot() {
+        this.listDots.forEach(dot => dot.classList.remove('dot-active'));
+        this.listDots[this.slideIndex].classList.add('dot-active');
     }
 
     #convertCounter(num) {
