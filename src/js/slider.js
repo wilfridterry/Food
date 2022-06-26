@@ -78,10 +78,11 @@ export class Slider {
 
     onClickPrev(e) {
         if (this.slideIndex == 0) {
-            return;
+            this.slideIndex = (this.total-1)
+        } else {
+            this.slideIndex--;
         }
 
-        this.slideIndex--;
         this.#slide();
     }
 
