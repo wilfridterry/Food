@@ -77,14 +77,12 @@
             font-weight: bold;
             color: rgba(0,0,0,1);
         }
-        // &-container {
-        //     display: flex;
-        //     width: 2600px;
-        //     transition: 1s all;
-        // }
+        &-container {
+            display: flex;
+            transition: 1s all;
+        }
     }
     &__slide {
-        display: none;
         width: 650px;
         height: 390px;
         img {
