@@ -1,6 +1,6 @@
 export class Slider {
-    container;
     slideIndex = 0;
+    container;
     wrapper;
     total;
     viewport;
@@ -11,12 +11,10 @@ export class Slider {
     currentSlide;
 
     constructor(selector) { 
-        this.container = document.querySelector(selector);
-        
-        this.#init();
+        this.container = document.querySelector(selector);        
     }
 
-    #init() {
+    init() {
         this.wrapper = this.container.querySelector('.offer__slider-wrapper');
         this.slideWidth = this.wrapper.clientWidth;
         this.total = this.container.querySelectorAll('.offer__slide').length;
