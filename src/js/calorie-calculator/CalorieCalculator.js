@@ -27,21 +27,30 @@ export class CalorieCalculator {
     }
 
     setGrowth(growth) {
-        this.#growth = growth;
+        if (typeof growth === 'number' && growth > 0 && growth < 500) {
+            this.#growth = growth;
+            return this;
+        }
 
-        return this;
+        throw new Error(`Invalid value of growth: ${growth}`);
     }
 
     setWeight(weight) {
-        this.#weight = weight;
+        if (typeof weight === 'number' && weight > 0 && weight < 300) {
+            this.#weight = weight;
+            return this;
+        }
 
-        return this;
+        throw new Error(`Invalid value of weight: ${weight}`);
     }
 
     setAge(age) {
-        this.#age = age;
+        if (typeof age === 'number' && age > 0 && age < 150) {
+            this.#age = age;
+            return this;
+        }
 
-        return this;
+        throw new Error(`Invalid value of age: ${age}`);
     }
 
     setActivity(activity) {
